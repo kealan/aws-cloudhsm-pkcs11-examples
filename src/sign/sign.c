@@ -32,7 +32,4 @@ int main(int argc, char **argv) {
 
     printf("Sign/verify with RSA\n");
     rsa_main(session);
-
-    printf("Sign/verify with EC\n");
-    ec_main(session);
 }
