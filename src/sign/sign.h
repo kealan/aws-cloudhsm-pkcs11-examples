@@ -7,8 +7,7 @@
 #include <stdlib.h>
 #include "common.h"
 
-CK_RV rsa_main(CK_SESSION_HANDLE session);
-CK_RV ec_main(CK_SESSION_HANDLE session);
+CK_RV hsm_main(CK_SESSION_HANDLE session);
 CK_RV generate_signature(CK_SESSION_HANDLE session,
                          CK_OBJECT_HANDLE key,
                          CK_MECHANISM_TYPE mechanism,
