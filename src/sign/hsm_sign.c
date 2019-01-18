@@ -1,19 +1,3 @@
-/*
- * Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this
- * software and associated documentation files (the "Software"), to deal in the Software
- * without restriction, including without limitation the rights to use, copy, modify,
- * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
- * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
- * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
 #include "sign.h"
 
 /**
@@ -50,14 +34,14 @@ CK_RV hsm_main(CK_SESSION_HANDLE session) {
         printf("AES key generation failed: %lu\n", rv);
     }    
 
-    CK_BYTE_PTR data = "TRS singature hash";
+    CK_BYTE_PTR data = "TRS hash";
     CK_ULONG data_length = strlen(data);
 
     CK_BYTE signature[MAX_SIGNATURE_LENGTH];
     CK_ULONG signature_length = MAX_SIGNATURE_LENGTH;
 
     // Set the PKCS11 signature mechanism type.
-    CK_MECHANISM_TYPE mechanism = CKM_SHA512_256_HMAC;
+    CK_MECHANISM_TYPE mechanism = CKM_SHA256_HMAC;
 
     rv = generate_signature(session, aes_key, mechanism,
                             data, data_length, signature, &signature_length);
