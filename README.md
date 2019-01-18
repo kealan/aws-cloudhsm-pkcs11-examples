@@ -1,4 +1,4 @@
-# aws-cloudhsm-pkcs11-examples
+# aws-cloudhsm-pkcs11-examples test
 
 ## Building the examples
 
