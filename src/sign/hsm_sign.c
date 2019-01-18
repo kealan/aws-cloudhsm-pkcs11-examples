@@ -11,7 +11,7 @@ CK_RV generate_aes_key(CK_SESSION_HANDLE session,
                        CK_ULONG key_length_bytes,
                        CK_OBJECT_HANDLE_PTR key) {
     CK_RV rv;
-    CK_MECHANISM mech = {CKM_AES_KEY_GEN, NULL, 0};
+    CK_MECHANISM mech = {CKM_GENERIC_SECRET_KEY_GEN, NULL, 0};
 
     CK_ATTRIBUTE template[] = {
             {CKA_SENSITIVE, &true,             sizeof(CK_BBOOL)},
