@@ -12,11 +12,13 @@ CK_RV generate_aes_key(CK_SESSION_HANDLE session,
                        CK_OBJECT_HANDLE_PTR key) {
     CK_RV rv;
     CK_MECHANISM mech = {CKM_GENERIC_SECRET_KEY_GEN, NULL, 0};
+    CK_OBJECT_CLASS key_class = CKO_SECRET_KEY;
+    CK_KEY_TYPE key_type = CKK_GENERIC_SECRET;
 
     CK_ATTRIBUTE template[] = {
-            {CKA_SENSITIVE, &true,             sizeof(CK_BBOOL)},
-            {CKA_TOKEN,     &false,            sizeof(CK_BBOOL)},
-            {CKA_VALUE_LEN, &key_length_bytes, sizeof(CK_ULONG)}
+          {CKA_CLASS, &key_class, sizeof(key_class)},
+          {CKA_KEY_TYPE, &key_type, sizeof(key_type)},
+          {CKA_VALUE_LEN, &key_length_bytes, sizeof(CK_ULONG)}
     };
 
     rv = funcs->C_GenerateKey(session, &mech, template, sizeof(template) / sizeof(CK_ATTRIBUTE), key);
@@ -27,7 +29,7 @@ CK_RV generate_aes_key(CK_SESSION_HANDLE session,
 CK_RV hsm_main(CK_SESSION_HANDLE session) {
   
     CK_OBJECT_HANDLE aes_key = CK_INVALID_HANDLE;
-    CK_RV  rv = generate_aes_key(session, 16, &aes_key);
+    CK_RV rv = generate_aes_key(session, 16, &aes_key);
     if (rv == CKR_OK) {
         printf("AES key generated. Key handle: %lu\n", aes_key);
     } else {
