@@ -1,13 +1,13 @@
 #include "sign.h"
 
 /**
- * Generate an AES key.
+ * Generate a key.
  * @param session  Valid PKCS#11 Session.
  * @param key_length_bytes Byte size of key. Supported sizes are here: https://docs.aws.amazon.com/cloudhsm/latest/userguide/pkcs11-key-types.html
  * @param key pointer to hold the resulting key handle.
  * @return CK_RV Value returned by the PKCS#11 library. This will indicate success or failure.
  */
-CK_RV generate_aes_key(CK_SESSION_HANDLE session,
+CK_RV generate_key(CK_SESSION_HANDLE session,
                        CK_ULONG key_length_bytes,
                        CK_OBJECT_HANDLE_PTR key) {
     CK_RV rv;
@@ -31,11 +31,11 @@ CK_RV generate_aes_key(CK_SESSION_HANDLE session,
 CK_RV hsm_main(CK_SESSION_HANDLE session) {
   
     CK_OBJECT_HANDLE aes_key = CK_INVALID_HANDLE;
-    CK_RV rv = generate_aes_key(session, 16, &aes_key);
+    CK_RV rv = generate_key(session, 16, &aes_key);
     if (rv == CKR_OK) {
-        printf("AES key generated. Key handle: %lu\n", aes_key);
+        printf("key generated. Key handle: %lu\n", aes_key);
     } else {
-        printf("AES key generation failed: %lu\n", rv);
+        printf("key generation failed: %lu\n", rv);
     }    
 
     CK_BYTE_PTR data = "TRS hash";
