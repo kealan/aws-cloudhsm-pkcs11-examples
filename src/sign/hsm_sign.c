@@ -17,7 +17,8 @@ CK_RV generate_aes_key(CK_SESSION_HANDLE session,
 
     CK_ATTRIBUTE template[] = {
           {CKA_CLASS, &key_class, sizeof(key_class)},
-          {CKA_SIGN, &true, sizeof(CK_BBOOL)},	  
+          {CKA_SIGN, &true, sizeof(CK_BBOOL)},
+          {CKA_VERIFY, &true, sizeof(CK_BBOOL)},	  	  
           {CKA_KEY_TYPE, &key_type, sizeof(key_type)},
           {CKA_VALUE_LEN, &key_length_bytes, sizeof(CK_ULONG)}
     };
